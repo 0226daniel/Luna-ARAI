@@ -1,11 +1,12 @@
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
-// Set these to run example.
 #define FIREBASE_HOST "luna-ai-secretary.firebaseio.com"
 #define FIREBASE_AUTH "sAR8yXUhP0KTmV8FMTfYfnmPwb1KjAvNSbCHNnza"
 #define WIFI_SSID "Angelhackathon"
 #define WIFI_PASSWORD "angel1234"
-#define relayPin 5
+#define relayPin 16
+#define neopixelPin 2
+#define neopixelNum 8
 
 void setup() {
   Serial.begin(9600);

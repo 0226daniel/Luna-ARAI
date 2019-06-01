@@ -1,4 +1,4 @@
-#define relayPin 2
+#define relayPin 5
 
 void setup() {
   Serial.begin(9600);

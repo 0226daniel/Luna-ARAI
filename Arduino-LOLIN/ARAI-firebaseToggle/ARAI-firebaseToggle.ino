@@ -5,16 +5,14 @@
 #define FIREBASE_AUTH "sAR8yXUhP0KTmV8FMTfYfnmPwb1KjAvNSbCHNnza"
 #define WIFI_SSID "Angelhackathon"
 #define WIFI_PASSWORD "angel1234"
-#define neopixel_1 5
-#define neopixel_2 6
-#define neopixel_3 7
+#define relayPin 16
+#define neopixelPin 2
+#define neopixelNum 8
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(3, neopixel_1, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(3, neopixel_2, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(3, neopixel_3, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(8, neopixelPin, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(relayPin, OUTPUT);
   // connect to wifi.
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -26,11 +24,16 @@ void setup() {
   Serial.println();
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
-  
+
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  Firebase.stream("/queue");
+
+  strip.begin();
+  strip.show();
 }
 
 void loop() {
+  
   String path = "";
   String data = "";
   if(Firebase.available()) {
@@ -46,7 +49,27 @@ void loop() {
       Serial.println(path);
     }
   }
+  if(data == "neoPixelToggle") {  
+    int relayState = digitalRead(relayPin);
+    if (relayState == HIGH) { 
+       digitalWrite(relayPin , LOW);
+       for (int i=0; i < neopixelNum; i++) {
+          strip.setPixelColor(i, 255, 255, 255);
+       }
+       strip.show();
+       removeData("neopixelToggle");
+      } 
+    if (relayState == LOW){
+      digitalWrite(relayPin, HIGH);
+      for (int i=0; i < neopixelNum; i++) {
+        strip.setPixelColor(i, 0, 0, 0);
+      }
+      strip.show();
+      removeData("neopixelToggle");
+    } 
+  }
 }
+
 void removeData(String path) {
   Firebase.remove("/queue" + path);
 }
