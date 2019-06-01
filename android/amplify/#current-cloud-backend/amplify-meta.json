@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "emplify-app-android-20190602030821-authRole",
+            "UnauthRoleArn": "arn:aws:iam::738168475808:role/emplify-app-android-20190602030821-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::738168475808:role/emplify-app-android-20190602030821-authRole",
+            "Region": "ap-northeast-2",
+            "DeploymentBucketName": "emplify-app-android-20190602030821-deployment",
+            "UnauthRoleName": "emplify-app-android-20190602030821-unauthRole",
+            "StackName": "emplify-app-android-20190602030821",
+            "StackId": "arn:aws:cloudformation:ap-northeast-2:738168475808:stack/emplify-app-android-20190602030821/3dd1b600-8498-11e9-a48e-02a607c38786"
+        }
+    }
+}
