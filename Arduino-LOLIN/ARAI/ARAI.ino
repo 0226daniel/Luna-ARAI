@@ -5,6 +5,8 @@
 #define FIREBASE_AUTH "sAR8yXUhP0KTmV8FMTfYfnmPwb1KjAvNSbCHNnza"
 #define WIFI_SSID "Angelhackathon"
 #define WIFI_PASSWORD "angel1234"
+#define WIFI_SSID_CAFE "MARU_Guest"
+#define WIFI_PASSWORD_CAFE "say_hello@maru180"
 #define relayPin 16
 #define neopixelPin 2
 #define neopixelNum 8
@@ -15,7 +17,7 @@ void setup() {
   Serial.begin(115200);
   pinMode(relayPin, OUTPUT);
   // connect to wifi.
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  WiFi.begin(WIFI_SSID_CAFE, WIFI_PASSWORD_CAFE);
   Serial.print("connecting");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
