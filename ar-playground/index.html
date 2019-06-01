@@ -33,16 +33,15 @@
     <script>
         AFRAME.registerComponent('markerhandler', {
             init: function () {
+
                 const animatedMarker = document.querySelector("#animated-marker");
                 const aEntity = document.querySelector("#animated-model");
 
-                animatedMarker.addEventListener('click', function (ev, target) {
-                    const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
-                    if (aEntity && intersectedElement === aEntity) {
-                        const scale = aEntity.getAttribute('scale');
-                        Object.keys(scale).forEach((key) => scale[key] = scale[key] + 1);
-                        aEntity.setAttribute('scale', scale);
-                    }
+                aEntity.addEventListener('mouseup', function (ev, target) {
+                    console.log(ev);
+                    const http = new XMLHttpRequest();
+                    http.open("GET", "https://us-central1-luna-ai-secretary.cloudfunctions.net/addInQueue/neoPixelToggle");
+                    http.send();
                 });
             }
         });
