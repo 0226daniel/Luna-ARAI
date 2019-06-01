@@ -9,6 +9,11 @@
             "UnauthRoleName": "android-env-20190602032931-unauthRole",
             "StackName": "android-env-20190602032931",
             "StackId": "arn:aws:cloudformation:ap-northeast-2:738168475808:stack/android-env-20190602032931/32e5f780-849b-11e9-9bf5-0addd5de9b96"
+        },
+        "categories": {
+            "auth": {
+                "cognito2f79ff80": {}
+            }
         }
     }
 }

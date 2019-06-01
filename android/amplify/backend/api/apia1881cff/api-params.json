@@ -1,0 +1,48 @@
+{
+    "paths": [
+        {
+            "name": "/items",
+            "lambdaFunction": "android43c38483",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "apia1881cff",
+    "apiName": "apia1881cff",
+    "functionArns": [
+        {
+            "lambdaFunction": "android43c38483"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "android-env-20190602032931-authRole",
+        "unAuthRoleName": "android-env-20190602032931-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "android43c38483",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
