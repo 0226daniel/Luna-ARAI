@@ -1,99 +1,103 @@
 <!doctype HTML>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    </head>
-    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
-    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
-    <script src="https://rawgit.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-click-events/events.js"></script>
-    
-    <body style='margin : 0px; overflow: hidden;'>
 
-        <div id="profile" style="color: greenyellow; width: 300px; height: 300px; background-color: red; position: absolute; top: 00px; left: 0; z-index: 999;">
-            Hello world!
-        </div>
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+<script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+<script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
+<script src="https://rawgit.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-click-events/events.js"></script>
 
-        
-        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
-        <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
-            <a-assets>
-                    <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
-                    <a-asset-item id="text">ㅁㄴㅇㄹ</a-asset-item>
-            </a-assets>
+<body style='margin : 0px; overflow: hidden;'>
 
-            <a-marker id="animated-marker" type='barcode' value='0'>
-                <a-entity
-                    gltf-model="#animated-asset"
-                    scale="2">
-                </a-entity>
-            </a-marker>
-
-            <a-marker type='barcode' value='1'>
-                <a-plane position='0 0 0' rotation="-90 0 0" color="blue"></a-plane>
-            </a-marker>
-
-            <a-marker type='barcode' value='2'>
-                <a-plane position='0 0 0' rotation="-90 0 0" color="yellow"></a-plane>
-            </a-marker>
-
-            <a-marker type='barcode' value='3'>
-                <a-plane position='0 0 0' rotation="-90 0 0" color="black"></a-plane>
-            </a-marker>
-
-            <a-marker type='barcode' value='4'>
-                <a-plane position='0 0 0' rotation="-90 0 0" color="green"></a-plane >
-            </a-marker>
-
-            <a-marker type='barcode' value='5' id="profile_" listener>
-                <a-plane position="0 0 0" rotation="-90 0 0" scale="1 1 1" material="shader:html;target: #profile; fps: 60;" id="model"></a-plane>
-            </a-marker>
-
-            <a-entity camera></a-entity>
-        </a-scene>
+    <div id="profile"
+        style="color: greenyellow; width: 300px; height: 300px; background-color: red; position: absolute; top: 00px; left: 0; z-index: 999;">
+        Hello world!
+    </div>
 
 
-        <script>
-            AFRAME.registerComponent('listener', {
-                init: function() {
-                    const animatedMarker = document.querySelector("#profile_");
-                    const aEntity = document.querySelector("#model");
+    <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
+    <a-scene embedded
+        arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+        <a-assets>
+            <a-asset-item id="animated-asset"
+                src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf">
+            </a-asset-item>
+            <a-asset-item id="text">ㅁㄴㅇㄹ</a-asset-item>
+        </a-assets>
 
-                    animatedMarker.addEventListener('click', function(ev, target){
-                        console.log('click')
-                        const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
-                        if (aEntity && intersectedElement === aEntity) {
-                            const scale = aEntity.getAttribute('scale');
-                            Object.keys(scale).forEach((key) => scale[key] = scale[key] + 1);
-                            aEntity.setAttribute('scale', scale);
-                        }
-                    })
-                },
-                tick: function () {
-                    var string = 'position: ' + JSON.stringify(this.el.getAttribute('position')) + '<br/>'+
+        <a-marker id="animated-marker" type='barcode' value='0'>
+            <a-entity gltf-model="#animated-asset" scale="2">
+            </a-entity>
+        </a-marker>
+
+        <a-marker type='barcode' value='1'>
+            <a-plane position='0 0 0' rotation="-90 0 0" color="blue"></a-plane>
+        </a-marker>
+
+        <a-marker type='barcode' value='2'>
+            <a-plane position='0 0 0' rotation="-90 0 0" color="yellow"></a-plane>
+        </a-marker>
+
+        <a-marker type='barcode' value='3'>
+            <a-plane position='0 0 0' rotation="-90 0 0" color="black"></a-plane>
+        </a-marker>
+
+        <a-marker type='barcode' value='4'>
+            <a-plane position='0 0 0' rotation="-90 0 0" color="green"></a-plane>
+        </a-marker>
+
+        <a-marker type='barcode' value='5' id="profile_" listener>
+            <a-plane position="0 0 0" rotation="-90 0 0" scale="1 1 1" material="shader:html;target: #profile; fps: 60;"
+                id="model"></a-plane>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+    </a-scene>
+
+
+    <script>
+        AFRAME.registerComponent('listener', {
+            init: function () {
+                const animatedMarker = document.querySelector("#profile_");
+                const aEntity = document.querySelector("#model");
+
+                animatedMarker.addEventListener('click', function (ev, target) {
+                    console.log('click')
+                    const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
+                    if (aEntity && intersectedElement === aEntity) {
+                        const scale = aEntity.getAttribute('scale');
+                        Object.keys(scale).forEach((key) => scale[key] = scale[key] + 1);
+                        aEntity.setAttribute('scale', scale);
+                    }
+                })
+            },
+            tick: function () {
+                var string = 'position: ' + JSON.stringify(this.el.getAttribute('position')) + '<br/>' +
                     'rotation: ' + JSON.stringify(this.el.getAttribute('rotation'))
 
-                    var m = document.querySelector("#profile")
-                    m.innerHTML = string
-                }
-            });
-            
-            m.addEventListener("markerFound", (e)=>{
-                console.log("found")
-                console.log(e)
-            })
-
-            m.addEventListener("markerLost", (e)=>{
-                console.log("lost")
-                console.log(e)
-            })
-
-
-            var v = document.querySelector("#profile_")
-            m.onClick = () => {
-v.style.color = Math.random(2) == 0? "red" : "blue"
+                var m = document.querySelector("#profile")
+                m.innerHTML = string
             }
-            </script>
-    </body>
+        });
+
+        m.addEventListener("markerFound", (e) => {
+            console.log("found")
+            console.log(e)
+        })
+
+        m.addEventListener("markerLost", (e) => {
+            console.log("lost")
+            console.log(e)
+        })
+
+        var v = document.querySelector("#profile_")
+        m.onClick = () => {
+            v.style.color = Math.random(2) == 0 ? "red" : "blue"
+        }
+    </script>
+</body>
+
 </html>
