@@ -1,0 +1,14 @@
+{
+    "env": {
+        "awscloudformation": {
+            "AuthRoleName": "android-env-20190602032931-authRole",
+            "UnauthRoleArn": "arn:aws:iam::738168475808:role/android-env-20190602032931-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::738168475808:role/android-env-20190602032931-authRole",
+            "Region": "ap-northeast-2",
+            "DeploymentBucketName": "android-env-20190602032931-deployment",
+            "UnauthRoleName": "android-env-20190602032931-unauthRole",
+            "StackName": "android-env-20190602032931",
+            "StackId": "arn:aws:cloudformation:ap-northeast-2:738168475808:stack/android-env-20190602032931/32e5f780-849b-11e9-9bf5-0addd5de9b96"
+        }
+    }
+}
