@@ -52,7 +52,7 @@
                 for (let i = 0; i < button_count; i++) {
                     let button = document.querySelector("#button" + i + "-model");
                     button.addEventListener('click', function (ev, target) {
-                        if (Date.now() - last_time >= 1) {
+                        if (Date.now() - last_time >= 1000) {
                             console.log(ev);
                             const http = new XMLHttpRequest();
                             http.open("GET", "https://us-central1-luna-ai-secretary.cloudfunctions.net/addInQueue/" + commands[i]);
