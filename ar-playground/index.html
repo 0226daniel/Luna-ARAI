@@ -18,20 +18,20 @@
             </a-asset-item>
         </a-assets>
 
-        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="button0-marker" type='barcode'
-            value='0'>
+        <a-marker markerhandler emitevents="true" cursor="fuse: false; rayOrigin: mouse" id="button0-marker"
+            type='barcode' value='0'>
             <a-entity id="button0-model" gltf-model="#button-asset" scale="3 3 3" position="">
             </a-entity>
         </a-marker>
 
-        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="button1-marker" type='barcode'
-            value='1'>
+        <a-marker markerhandler emitevents="true" cursor="fuse: false; rayOrigin: mouse" id="button1-marker"
+            type='barcode' value='1'>
             <a-entity id="button1-model" gltf-model="#button-asset" scale="3 3 3" position="">
             </a-entity>
         </a-marker>
 
-        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="button2-marker" type='barcode'
-            value='2'>
+        <a-marker markerhandler emitevents="true" cursor="fuse: false; rayOrigin: mouse" id="button2-marker"
+            type='barcode' value='2'>
             <a-entity id="button2-model" gltf-model="#button-asset" scale="3 3 3" position="">
             </a-entity>
         </a-marker>
@@ -51,7 +51,7 @@
                 let buttons = [];
                 for (let i = 0; i < button_count; i++) {
                     let button = document.querySelector("#button" + i + "-model");
-                    button.addEventListener('touchstart', function (ev, target) {
+                    button.addEventListener('click', function (ev, target) {
                         if (Date.now() - last_time >= 2) {
                             console.log(ev);
                             const http = new XMLHttpRequest();
