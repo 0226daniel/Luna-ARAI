@@ -4,45 +4,59 @@
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 </head>
+
 <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
 <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 
-
 <body style='margin : 0px; overflow: hidden;'>
-
-    <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
     <a-scene embedded
         arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
         <a-assets>
-            <a-asset-item id="animated-asset" src="./models/button.glb">
+            <a-asset-item id="button-asset" src="./models/button.glb">
             </a-asset-item>
         </a-assets>
 
-        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="animated-marker" type='barcode'
+        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="button0-marker" type='barcode'
             value='0'>
-            <a-entity id="animated-model" gltf-model="#animated-asset" scale="3 3 3" position="0.2 0.2 -0.8">
+            <a-entity id="button0-model" gltf-model="#button-asset" scale="3 3 3" position="0.2 0.2 -0.8">
+            </a-entity>
+        </a-marker>
+
+        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="button1-marker" type='barcode'
+            value='1'>
+            <a-entity id="button1-model" gltf-model="#button-asset" scale="3 3 3" position="0.2 0.2 -0.8">
+            </a-entity>
+        </a-marker>
+
+        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="button2-marker" type='barcode'
+            value='2'>
+            <a-entity id="button2-model" gltf-model="#button-asset" scale="3 3 3" position="0.2 0.2 -0.8">
             </a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>
     </a-scene>
 
-
     <script>
         AFRAME.registerComponent('markerhandler', {
             init: function () {
+                const button_count = 3;
+                const commands = ["neoPixelToggle", "relayToggle", "servoToggle"];
 
-                const animatedMarker = document.querySelector("#animated-marker");
-                const aEntity = document.querySelector("#animated-model");
+                let buttons = [];
+                for (let i = 0; i < button_count; i++) {
+                    let button = document.querySelector("#button" + i + "-model");
+                    button.addEventListener('mouseup', function (ev, target) {
+                        console.log(ev);
+                        const http = new XMLHttpRequest();
+                        http.open("GET", "https://us-central1-luna-ai-secretary.cloudfunctions.net/addInQueue/" + commands[i]);
+                        http.send();
+                    });
 
-                aEntity.addEventListener('mouseup', function (ev, target) {
-                    console.log(ev);
-                    const http = new XMLHttpRequest();
-                    http.open("GET", "https://us-central1-luna-ai-secretary.cloudfunctions.net/addInQueue/neoPixelToggle");
-                    http.send();
-                });
+                    buttons.push(button);
+                }
             }
         });
     </script>
