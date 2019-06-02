@@ -51,7 +51,7 @@
                 let buttons = [];
                 for (let i = 0; i < button_count; i++) {
                     let button = document.querySelector("#button" + i + "-model");
-                    button.addEventListener('click', function (ev, target) {
+                    button.addEventListener('touchstart', function (ev, target) {
                         if (Date.now() - last_time >= 2) {
                             console.log(ev);
                             const http = new XMLHttpRequest();
@@ -60,7 +60,7 @@
 
                             last_time = Date.now();
                         }
-                    });
+                    }, false);
 
                     buttons.push(button);
                 }
